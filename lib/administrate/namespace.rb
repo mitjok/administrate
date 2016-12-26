@@ -2,11 +2,15 @@ module Administrate
   class Namespace
     def initialize(namespace)
       @namespace = namespace
+      Resource = Struct.new(:name, :path)
     end
 
     def resources
       namespace_controller_paths.uniq.map do |controller|
-        controller.gsub(/^#{namespace}\//, "").to_sym
+        Resource.new(
+           controller.gsub(/^#{namespace}\//, "").to_sym,
+           controller.split('/').map(&:to_sym)
+         )
       end
     end
 
