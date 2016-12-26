@@ -1,8 +1,9 @@
 module Administrate
   class Namespace
+    Resource = Struct.new(:name, :path)
+
     def initialize(namespace)
       @namespace = namespace
-      Resource = Struct.new(:name, :path)
     end
 
     def resources
